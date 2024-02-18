@@ -2,7 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Autoplay, Navigation, Virtual } from 'swiper';
+import { Autoplay, Navigation, Virtual } from 'swiper/modules'
 import Link from 'next/link';
 
 
