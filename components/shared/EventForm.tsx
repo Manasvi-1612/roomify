@@ -20,6 +20,7 @@ import { eventDefaultValues } from "@/constants";
 import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import Login from "./Login";
+import toast from "react-hot-toast";
 
 type FormProps = {
     role: "student" | "company"
@@ -33,21 +34,21 @@ const EventForm = (role: FormProps) => {
     })
 
     async function onSubmit(values: z.infer<typeof eventFormSchema>) {
+
         try {
             const response = await axios.post("/api/users/signup", { values, role });
 
             if (response) {
                 form.reset()
-                console.log("response", response)
+                toast.success("Signup successfully. Now login 🔥")
             }
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            toast.error(`${error.message}`)
         }
     }
 
     return (
         <Form {...form}>
-
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 border-2 p-10 bg-white rounded-3xl">
                 <div className="flex flex-col gap-5 md:flex-row">
                     <FormField
@@ -130,3 +131,4 @@ const EventForm = (role: FormProps) => {
 }
 
 export default EventForm
+

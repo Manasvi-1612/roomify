@@ -32,6 +32,7 @@ import {
 import { z } from "zod"
 import axios from "axios"
 import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 const Login = () => {
 
@@ -52,9 +53,10 @@ const Login = () => {
             if (response) {
                 form.reset()
                 router.push("/profile")
+                toast.success("Login successfully. Welcome 🔥")
             }
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            toast.error(`${error.message}`)
         }
     }
 

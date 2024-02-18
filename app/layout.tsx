@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google'
 import './globals.css'
 import Footer from '@/components/shared/Footer'
 import Header from '@/components/shared/Header'
+import { Toaster } from 'react-hot-toast'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <div className="flex h-screen flex-col">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <Toaster position='top-center' />
+            {children}
+          </main>
           <Footer />
         </div>
       </body>
