@@ -33,10 +33,13 @@ import { z } from "zod"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
+import useAuth from "@/context/useAuth"
 
 const Login = () => {
 
     const [active, setActive] = useState(false)
+
+    const { setAuthStatus } = useAuth()
 
     const form = useForm<z.infer<typeof loginFormSchema>>({
         resolver: zodResolver(loginFormSchema),
@@ -53,6 +56,7 @@ const Login = () => {
             if (response) {
                 form.reset()
                 router.push("/profile")
+                setAuthStatus(true)
                 toast.success("Login successfully. Welcome 🔥")
             }
         } catch (error: any) {

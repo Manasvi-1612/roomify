@@ -10,22 +10,25 @@ import { getToken } from "@/lib/actions/user.actions"
 import { Button } from "../ui/button"
 import Logout from "./Logout"
 import { useEffect, useState } from "react"
+import useAuth from "@/context/useAuth"
 
 
 const Header = () => {
-  const [token, setToken] = useState(false)
+  // const [token, setToken] = useState(false)
 
-  const checkToken = async () => {
-    const token = await getToken()
-    console.log(token)
-    if (token) {
-      setToken(true)
-    }
-  }
+  // const checkToken = async () => {
+  //   const token = await getToken()
+  //   console.log(token)
+  //   if (token) {
+  //     setToken(true)
+  //   }
+  // }
 
-  useEffect(() => {
-    checkToken()
-  }, [])
+  // useEffect(() => {
+  //   checkToken()
+  // }, [])
+
+  const { authStatus } = useAuth()
 
   return (
     <header className="w-full border-b">
@@ -41,7 +44,7 @@ const Header = () => {
         <div className="flex w-32 justify-end gap-3">
           <MobileNav />
 
-          {token ? (
+          {authStatus ? (
             <Logout />
           ) : (
             <div className="flex gap-3">
